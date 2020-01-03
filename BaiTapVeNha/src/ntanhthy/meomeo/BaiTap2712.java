@@ -2,34 +2,26 @@ package ntanhthy.meomeo;
 
 import java.util.Scanner;
 /**
- * Đây là hàm kiểm tra maail có hợp lệ hay hok.
- * Mail hợp lệ là mail
- * 		a. Có dấu @ trong chuỗi và nằm ở vị trí khác 0 và n-1
- * 		b. Có dấu . trong chuỗi, nằm sau dấu @ và sau ít nhất 1 vị trí và khác n-1
- * 		c. Sau @ không là số
- * 		d. Chỉ nhận mail có đuôi là .com hoặc .vn hoặc .com.vn
- * @param mail là chuỗi người dùng nhập vào
- * @return đúng nếu mail hợp lệ và ngược lại.
- * hàm dấu @
- * hàm chuỗi sau @
- * hàm dấu .
+ * Chương trình kiểm tra mail hợp lệ hay không
+ * @author ntanhthy
+ *
  */
 public class BaiTap2712 {
-	
-	static boolean validateMail(String mail)
+
+	static boolean ValidateMail(String mail)
 	{
-		if (dauCham(mail)&&dauCong(mail)&&kyTu(mail))
+		if (DauACong(mail)&&DauCham(mail)&&KyTu(mail))
 			return true;
-		return false;
+		else
+			return false;
 	}
 	
-	static boolean dauCham(String mail)
+	static boolean DauACong (String mail)
 	{
-		char dauacong = '@';
-		char daucham = '.';
-		if(mail.contains("."))
+		char dauACong = '@';
+		if(mail.contains("@"))
 		{
-			if((mail.indexOf(daucham)-mail.indexOf(dauacong)<=1)||(mail.indexOf(daucham)==mail.length())||(mail.indexOf(daucham)==0))
+			if((mail.indexOf(dauACong)==0)||(mail.indexOf(dauACong)==mail.length()))
 				return false;
 			else
 				return true;
@@ -38,44 +30,38 @@ public class BaiTap2712 {
 			return false;
 	}
 	
-	static boolean dauCong(String mail)
+	static boolean DauCham(String mail)
 	{
-		char dauacong = '@';
-		if(mail.contains("@"))
-		{
-			if((mail.indexOf(dauacong)==0)||(mail.indexOf(dauacong)==mail.length()))
-				return false;
-			else
-				return true;
-		}
+		char dauCham = '.';
+		char dauACong = '@';
+		if((mail.indexOf(dauCham)-mail.indexOf(dauACong)<=1)||(mail.indexOf(dauCham)==0)||(mail.indexOf(dauCham)==mail.length()))
+			return false;
 		else
-			return false;	
+			return true;
 	}
 	
-	static boolean kyTu(String mail)
+	static boolean KyTu(String mail)
 	{
 		if((mail.endsWith(".com"))||(mail.endsWith(".vn"))||(mail.endsWith(".com.vn")))
 			return true;
 		else
 			return false;
 	}
-
+	
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
-		System.out.println("Nhập mail: ");
+		System.out.println("Nhập mail:");
 		while (true)
 		{
 			String mail = new Scanner(System.in).nextLine();
-			if(validateMail(mail))
+			if (ValidateMail(mail))
 			{
 				System.out.println("Mail hợp lệ.");
 				break;
 			}
 			else
 			{
-				System.out.println("Mail không hợp lệ. Nhập lại mail.");
+				System.out.println("Mail không hợp lệ. Nhập lại.");
 			}
 		}
 	}
-
 }
